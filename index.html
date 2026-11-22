@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>СТРОЙМАСТЕР ПРО // Ремонт и строительство под ключ</title>
+  <style>
+    :root {
+      --bg-main: #0B0F17;
+      --bg-card: #131926;
+      --bg-input: #1A2234;
+      --border: #263045;
+      --amber: #F59E0B;
+      --amber-hover: #FBBF24;
+      --amber-glow: rgba(245, 158, 11, 0.25);
+      --green-wa: #16A34A;
+      --green-wa-hover: #15803D;
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      background-image:
+        radial-gradient(circle at 82% 0%, rgba(245, 158, 11, 0.13) 0%, transparent 45%),
+        linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+      background-size: 100% 100%, 36px 36px, 36px 36px;
+      overflow-x: hidden;
+      padding-bottom: 92px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    svg {
+      display: inline-block;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 18px;
+    }
+
+    /* STICKY HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(11, 15, 23, 0.9);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, var(--amber) 0%, #D97706 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 19px;
+      color: #0B0F17;
+      box-shadow: 0 6px 18px var(--amber-glow);
+    }
+
+    .brand-title {
+      font-weight: 900;
+      font-size: 14px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      line-height: 1.15;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 2px;
+    }
+
+    .header-cta {
+      background: var(--bg-card);
+      border: 1px solid var(--amber);
+      color: var(--amber);
+      padding: 9px 14px;
+      border-radius: 11px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .header-cta:hover {
+      background: var(--amber);
+      color: #0B0F17;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      padding: 34px 0 26px;
+    }
+
+    .trust-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      color: #FBBF24;
+      padding: 6px 13px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .trust-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--amber);
+      box-shadow: 0 0 8px var(--amber);
+    }
+
+    h1 {
+      font-size: clamp(27px, 5.8vw, 50px);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    h1 span {
+      color: var(--amber);
+    }
+
+    .hero-desc {
+      color: var(--text-muted);
+      font-size: 15px;
+      max-width: 620px;
+      margin-bottom: 24px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--amber);
+      color: #0B0F17;
+      font-weight: 900;
+      font-size: 14px;
+      padding: 15px 24px;
+      border-radius: 13px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 24px var(--amber-glow);
+      transition: all 0.2s ease;
+      flex: 1 1 220px;
+    }
+
+    .btn-primary:hover {
+      background: var(--amber-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      font-weight: 700;
+      font-size: 14px;
+      padding: 15px 24px;
+      border-radius: 13px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      flex: 1 1 220px;
+    }
+
+    .btn-whatsapp:hover {
+      border-color: var(--green-wa);
+      color: #4ADE80;
+    }
+
+    .rating-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+      padding: 13px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    .rating-stars {
+      color: var(--amber);
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .contract-tag {
+      font-size: 11px;
+      font-weight: 700;
+      color: #4ADE80;
+      background: rgba(22, 163, 74, 0.14);
+      border: 1px solid rgba(22, 163, 74, 0.3);
+      padding: 4px 10px;
+      border-radius: 8px;
+    }
+
+    /* ARCHITECTURAL BLUEPRINT BANNER */
+    .blueprint-card {
+      margin-top: 22px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .blueprint-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .blueprint-pill {
+      background: rgba(245, 158, 11, 0.14);
+      color: var(--amber);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      padding: 4px 10px;
+      border-radius: 7px;
+    }
+
+    .arch-svg {
+      width: 100%;
+      height: auto;
+      max-height: 140px;
+      display: block;
+      margin: 8px auto 16px;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .metric-box {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 8px;
+      text-align: center;
+    }
+
+    .metric-val {
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--amber);
+    }
+
+    .metric-lbl {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* SECTIONS */
+    .section {
+      padding: 28px 0;
+    }
+
+    .section-tag {
+      color: var(--amber);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+
+    h2 {
+      font-size: clamp(22px, 4.5vw, 34px);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    /* QUIZ / COST ESTIMATOR */
+    .quiz-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 14px;
+      color: var(--text-main);
+    }
+
+    .step-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 7px;
+      background: var(--amber);
+      color: #0B0F17;
+      font-size: 12px;
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .options-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 640px) {
+      .options-grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .opt-card {
+      background: var(--bg-input);
+      border: 1.5px solid var(--border);
+      border-radius: 13px;
+      padding: 14px;
+      text-align: left;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .opt-card.active {
+      border-color: var(--amber);
+      background: rgba(245, 158, 11, 0.11);
+      box-shadow: 0 0 0 1px var(--amber);
+    }
+
+    .opt-title {
+      font-weight: 800;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .opt-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .opt-rate {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--amber);
+      margin-top: 8px;
+    }
+
+    /* AREA SLIDER */
+    .slider-box {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .slider-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .slider-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .slider-value {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--amber);
+      background: rgba(245, 158, 11, 0.12);
+      padding: 4px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 8px;
+      border-radius: 6px;
+      background: #2C374F;
+      outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--amber);
+      border: 3px solid #0B0F17;
+      cursor: pointer;
+      box-shadow: 0 0 12px var(--amber-glow);
+    }
+
+    .slider-ticks {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    /* EXTRA CHECKBOXES */
+    .extras-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 720px) {
+      .extras-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .extra-item {
+      background: var(--bg-input);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 13px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      user-select: none;
+      transition: 0.2s;
+    }
+
+    .extra-item.selected {
+      border-color: var(--amber);
+      background: rgba(245, 158, 11, 0.09);
+    }
+
+    .chk-box {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      border: 2px solid var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .extra-item.selected .chk-box {
+      background: var(--amber);
+      border-color: var(--amber);
+    }
+
+    .extra-text {
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .extra-cost {
+      font-size: 11px;
+      color: var(--amber);
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    /* LIVE SUMMARY CARD */
+    .summary-card {
+      background: linear-gradient(145deg, #172033, #0F1420);
+      border: 1.5px solid var(--amber);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .sum-tag {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .sum-meta {
+      font-size: 13px;
+      color: var(--text-main);
+      margin-bottom: 14px;
+    }
+
+    .sum-totals {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 14px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 16px;
+      gap: 12px;
+    }
+
+    .sum-price-lbl {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .sum-price-val {
+      font-size: clamp(26px, 5vw, 34px);
+      font-weight: 900;
+      color: var(--text-main);
+      line-height: 1.1;
+    }
+
+    .sum-time-box {
+      text-align: right;
+    }
+
+    .sum-time-val {
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--amber);
+    }
+
+    .sum-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-wa-full {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      background: var(--green-wa);
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 14px;
+      padding: 15px;
+      border-radius: 13px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-wa-full:hover {
+      background: var(--green-wa-hover);
+    }
+
+    .btn-engineer-full {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      background: var(--amber);
+      color: #0B0F17;
+      font-weight: 900;
+      font-size: 14px;
+      padding: 15px;
+      border-radius: 13px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .note-line {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    /* PORTFOLIO CASES */
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    @media (max-width: 760px) {
+      .cases-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .case-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .case-top-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .case-tag {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 9px;
+      border-radius: 7px;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      color: var(--amber);
+    }
+
+    .case-title {
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .case-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .case-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+    }
+
+    /* BENTO ADVANTAGES */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .bento-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .bento-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+    }
+
+    .bento-num {
+      font-size: 11px;
+      font-weight: 900;
+      color: var(--amber);
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+
+    .bento-title {
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .bento-text {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* CONTACTS FOOTER */
+    .footer-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 680px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .contact-grid strong {
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--amber);
+      margin-bottom: 2px;
+    }
+
+    /* FLOATING DEMO CUSTOMIZER & MODALS */
+    .demo-fab {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      z-index: 90;
+      background: #1A2234;
+      border: 1.5px solid var(--amber);
+      color: #FFFFFF;
+      padding: 11px 15px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.7);
+      cursor: pointer;
+    }
+
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      width: 100%;
+      max-width: 420px;
+      padding: 22px;
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 16px;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+
+    .modal-close {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .field {
+      margin-bottom: 12px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .field input {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      color: #FFFFFF;
+      padding: 12px;
+      border-radius: 11px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .field input:focus {
+      border-color: var(--amber);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- STICKY HEADER -->
+  <header>
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="brand-logo" id="ui-logo">С</div>
+        <div>
+          <div class="brand-title" id="ui-brand">СТРОЙМАСТЕР ПРО</div>
+          <div class="brand-sub" id="ui-city">ЮЖНО-САХАЛИНСК · ПОД КЛЮЧ</div>
+        </div>
+      </div>
+      <button type="button" class="header-cta" onclick="openMeasureModal()">Бесплатный замер</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="trust-badge">
+        <span class="trust-dot"></span>
+        РАБОТАЕМ ПО ДОГОВОРУ С ФИКСИРОВАННОЙ СМЕТОЙ
+      </div>
+
+      <h1>РЕМОНТ КВАРТИР И <span>СТРОИТЕЛЬСТВО ДОМОВ</span> ТОЧНО В СРОК</h1>
+
+      <p class="hero-desc">
+        От черновой отделки новостройки и инженерных сетей до возведения коттеджей под ключ. Поэтапная оплата только за принятые работы и ежедневный фотоотчет в Telegram.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#quiz" class="btn-primary">Рассчитать смету онлайн</a>
+        <button type="button" class="btn-whatsapp" onclick="directWA()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#16A34A">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/>
+          </svg>
+          Написать в WhatsApp
+        </button>
+      </div>
+
+      <div class="rating-bar">
+        <div>
+          <span class="rating-stars">★★★★★ 5.0</span>
+          <span>На Яндекс Картах · 94 сданных объекта</span>
+        </div>
+        <span class="contract-tag">Гарантия 36 мес. по СНиП</span>
+      </div>
+
+      <!-- ARCHITECTURAL BLUEPRINT BANNER -->
+      <div class="blueprint-card">
+        <div class="blueprint-top">
+          <span>ИНЖЕНЕРНЫЙ КОНТРОЛЬ // ПРОЕКТНАЯ ДОКУМЕНТАЦИЯ</span>
+          <span class="blueprint-pill">СМЕТА ЗА 24 ЧАСА</span>
+        </div>
+
+        <svg class="arch-svg" viewBox="0 0 460 115" fill="none">
+          <rect x="30" y="25" width="400" height="72" stroke="#F59E0B" stroke-width="2" fill="rgba(245,158,11,0.06)"/>
+          <line x1="165" y1="25" x2="165" y2="97" stroke="#F59E0B" stroke-width="1.5"/>
+          <line x1="305" y1="25" x2="305" y2="68" stroke="#F59E0B" stroke-width="1.5"/>
+          <line x1="305" y1="68" x2="430" y2="68" stroke="#F59E0B" stroke-width="1.5"/>
+          <line x1="30" y1="12" x2="430" y2="12" stroke="#94A3B8" stroke-width="1" stroke-dasharray="4 4"/>
+          <circle cx="30" cy="12" r="3" fill="#F59E0B"/>
+          <circle cx="430" cy="12" r="3" fill="#F59E0B"/>
+          <text x="205" y="10" fill="#F59E0B" font-size="9" font-family="monospace">PLAN // 1:50 SCALE</text>
+          <text x="68" y="65" fill="#F8FAFC" font-size="10" font-family="sans-serif" font-weight="bold">ГОСТИНАЯ 28 м²</text>
+          <text x="200" y="65" fill="#F8FAFC" font-size="10" font-family="sans-serif" font-weight="bold">СПАЛЬНЯ 18 м²</text>
+          <text x="335" y="50" fill="#94A3B8" font-size="9" font-family="sans-serif">КУХНЯ 14 м²</text>
+        </svg>
+
+        <div class="metrics-grid">
+          <div class="metric-box">
+            <div class="metric-val">0 ₽</div>
+            <div class="metric-lbl">Выезд инженера</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-val">-20%</div>
+            <div class="metric-lbl">Скидка на материалы</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-val">3 ГОДА</div>
+            <div class="metric-lbl">Гарантия на работы</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE MULTI-STEP QUIZ / COST ESTIMATOR -->
+    <section class="section" id="quiz">
+      <div class="section-tag">ОНЛАЙН-КАЛЬКУЛЯТОР</div>
+      <h2>РАСЧЕТ СМЕТЫ ЗА 30 СЕКУНД</h2>
+
+      <div class="quiz-panel">
+        <!-- STEP 1 -->
+        <div class="step-header">
+          <span class="step-num">1</span>
+          ТИП ОБЪЕКТА
+        </div>
+        <div class="options-grid-3" id="obj-types">
+          <button type="button" class="opt-card active" data-rate="14000" data-name="Квартира / Новостройка" onclick="pickObjType(this)">
+            <div class="opt-title">Квартира / Новостройка</div>
+            <div class="opt-sub">Вторичка или бетонная коробка</div>
+            <div class="opt-rate">от 14 000 ₽ / м²</div>
+          </button>
+
+          <button type="button" class="opt-card" data-rate="18000" data-name="Частный дом / Коттедж" onclick="pickObjType(this)">
+            <div class="opt-title">Частный дом / Коттедж</div>
+            <div class="opt-sub">Внутренняя отделка или стройка</div>
+            <div class="opt-rate">от 18 000 ₽ / м²</div>
+          </button>
+
+          <button type="button" class="opt-card" data-rate="12500" data-name="Коммерческое помещение / Офис" onclick="pickObjType(this)">
+            <div class="opt-title">Коммерция / Офис</div>
+            <div class="opt-sub">Магазины, салоны, склады</div>
+            <div class="opt-rate">от 12 500 ₽ / м²</div>
+          </button>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="step-header">
+          <span class="step-num">2</span>
+          КЛАСС РЕМОНТА И РАБОТ
+        </div>
+        <div class="options-grid-3" id="work-types">
+          <button type="button" class="opt-card" data-mult="0.75" data-weeks-factor="0.06" data-name="Косметический ремонт" onclick="pickWorkType(this)">
+            <div class="opt-title">Косметический ремонт</div>
+            <div class="opt-sub">Обновление стен, полов, потолков</div>
+            <div class="opt-rate">Коэффициент ×0.75</div>
+          </button>
+
+          <button type="button" class="opt-card active" data-mult="1.0" data-weeks-factor="0.09" data-name="Капитальный под ключ" onclick="pickWorkType(this)">
+            <div class="opt-title">Капитальный под ключ</div>
+            <div class="opt-sub">Стяжка, электрика, сантехника, чистовая</div>
+            <div class="opt-rate">Базовый тариф ×1.0</div>
+          </button>
+
+          <button type="button" class="opt-card" data-mult="1.45" data-weeks-factor="0.13" data-name="Дизайнерский / Коттедж с нуля" onclick="pickWorkType(this)">
+            <div class="opt-title">Дизайнерский / С нуля</div>
+            <div class="opt-sub">Сложные узлы, теневой профиль, инженерия</div>
+            <div class="opt-rate">Коэффициент ×1.45</div>
+          </button>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="step-header">
+          <span class="step-num">3</span>
+          ПЛОЩАДЬ ОБЪЕКТА И ДОПОЛНИТЕЛЬНЫЕ ОПЦИИ
+        </div>
+
+        <div class="slider-box">
+          <div class="slider-top">
+            <span class="slider-label">Общая площадь по полу:</span>
+            <span class="slider-value" id="area-display">65 м²</span>
+          </div>
+          <input type="range" id="area-slider" min="20" max="250" step="1" value="65" oninput="updateArea(this.value)" />
+          <div class="slider-ticks">
+            <span>20 м² (студия)</span>
+            <span>100 м²</span>
+            <span>250 м² (коттедж)</span>
+          </div>
+        </div>
+
+        <div class="extras-list" id="extras-box">
+          <div class="extra-item selected" data-id="rough" data-flat="0" data-perm2="2500" data-title="Закупка и доставка черновых материалов" onclick="toggleExtra(this)">
+            <div class="chk-box">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0B0F17" stroke-width="3.5"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <div class="extra-text">Закупка и доставка черновых материалов</div>
+              <div class="extra-cost">+2 500 ₽ / м²</div>
+            </div>
+          </div>
+
+          <div class="extra-item" data-id="ceilings" data-flat="0" data-perm2="1800" data-title="Натяжные потолки и электрика" onclick="toggleExtra(this)">
+            <div class="chk-box"></div>
+            <div>
+              <div class="extra-text">Натяжные потолки и электрика</div>
+              <div class="extra-cost">+1 800 ₽ / м²</div>
+            </div>
+          </div>
+
+          <div class="extra-item selected" data-id="design" data-flat="0" data-perm2="0" data-title="Дизайн-проект в подарок" onclick="toggleExtra(this)">
+            <div class="chk-box">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0B0F17" stroke-width="3.5"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <div class="extra-text">Дизайн-проект в подарок</div>
+              <div class="extra-cost">0 ₽ (при заказе под ключ)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LIVE SUMMARY CARD -->
+        <div class="summary-card">
+          <div class="sum-tag">ПРЕДВАРИТЕЛЬНЫЙ РАСЧЕТ СМЕТЫ</div>
+          <div class="sum-meta">
+            <strong id="sum-obj" style="color:#F59E0B;">Квартира / Новостройка</strong> ·
+            <span id="sum-work">Капитальный под ключ</span> ·
+            <strong id="sum-area">65 м²</strong>
+          </div>
+
+          <div class="sum-totals">
+            <div>
+              <div class="sum-price-lbl">Ориентировочная стоимость:</div>
+              <div class="sum-price-val" id="sum-price">1 072 500 ₽</div>
+            </div>
+            <div class="sum-time-box">
+              <div class="sum-price-lbl">Срок сдачи:</div>
+              <div class="sum-time-val" id="sum-weeks">~6 недель</div>
+            </div>
+          </div>
+
+          <div class="sum-btns">
+            <button type="button" class="btn-wa-full" onclick="sendQuizToWA()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#FFFFFF">
+                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/>
+              </svg>
+              Отправить смету в WhatsApp
+            </button>
+            <button type="button" class="btn-engineer-full" onclick="openMeasureModal()">
+              Вызвать инженера на замер
+            </button>
+          </div>
+
+          <div class="note-line">* Инженер приедет с лазерным нивелиром и составит точную смету до рубля</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO CASES -->
+    <section class="section">
+      <div class="section-tag">РЕАЛЬНЫЕ ОБЪЕКТЫ</div>
+      <h2>СДАННЫЕ ПРОЕКТЫ В ГОРОДЕ</h2>
+
+      <div class="cases-grid">
+        <div class="case-card">
+          <div>
+            <div class="case-top-tags">
+              <span class="case-tag">78 м²</span>
+              <span class="case-tag">1 280 000 ₽</span>
+              <span class="case-tag">7 недель</span>
+            </div>
+            <div class="case-title">Евротрешка в ЖК «Авангард»</div>
+            <div class="case-desc">
+              Капитальный ремонт с нуля: механизированная штукатурка, разводка электрики на 36 групп, керамогранит 120×60 в санузле и теневые потолки.
+            </div>
+          </div>
+          <div class="case-footer">
+            <span style="color:#94A3B8;">Статус:</span>
+            <strong style="color:#4ADE80;">● Сдан по акту</strong>
+          </div>
+        </div>
+
+        <div class="case-card">
+          <div>
+            <div class="case-top-tags">
+              <span class="case-tag">145 м²</span>
+              <span class="case-tag">2 850 000 ₽</span>
+              <span class="case-tag">12 недель</span>
+            </div>
+            <div class="case-title">Двухэтажный коттедж под ключ</div>
+            <div class="case-desc">
+              Монтаж водяных теплых полов, котельная под ключ, лестница из массива ясеня, декоративная штукатурка и фасадное освещение.
+            </div>
+          </div>
+          <div class="case-footer">
+            <span style="color:#94A3B8;">Статус:</span>
+            <strong style="color:#4ADE80;">● Сдан по акту</strong>
+          </div>
+        </div>
+
+        <div class="case-card">
+          <div>
+            <div class="case-top-tags">
+              <span class="case-tag">92 м²</span>
+              <span class="case-tag">1 150 000 ₽</span>
+              <span class="case-tag">5 недель</span>
+            </div>
+            <div class="case-title">Клиника и шоурум в центре</div>
+            <div class="case-desc">
+              Перепланировка по проекту, приточно-вытяжная вентиляция, износостойкий кварцвинил коммерческого класса и трековое освещение.
+            </div>
+          </div>
+          <div class="case-footer">
+            <span style="color:#94A3B8;">Статус:</span>
+            <strong style="color:#4ADE80;">● Сдан по акту</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 BENTO-GRID ADVANTAGES -->
+    <section class="section">
+      <div class="section-tag">СТАНДАРТ РАБОТЫ</div>
+      <h2>ПОЧЕМУ ЗАКАЗЫВАЮТ У НАС</h2>
+
+      <div class="bento-grid">
+        <div class="bento-card">
+          <div class="bento-num">01 // БЕЗ РИСКОВ</div>
+          <div class="bento-title">Поэтапная оплата без предоплаты</div>
+          <div class="bento-text">
+            Вы платите только за фактически выполненный и принятый вами этап работ (черновые, инженерия, чистовая отделка).
+          </div>
+        </div>
+
+        <div class="bento-card">
+          <div class="bento-num">02 // ПРОЗРАЧНОСТЬ</div>
+          <div class="bento-title">Технадзор и фотоотчет в Telegram</div>
+          <div class="bento-text">
+            Создаем рабочий чат объекта: прораб ежедневно присылает фото и видео скрытых работ до зашивки стен и полов.
+          </div>
+        </div>
+
+        <div class="bento-card">
+          <div class="bento-num">03 // ОТВЕТСТВЕННОСТЬ</div>
+          <div class="bento-title">Гарантия 3 года по договору</div>
+          <div class="bento-text">
+            Юридически отвечаем за герметичность сантехники, ровность стен и электрику. Выезд сервисной бригады в течение 24 часов.
+          </div>
+        </div>
+
+        <div class="bento-card">
+          <div class="bento-num">04 // ЭКОНОМИЯ</div>
+          <div class="bento-title">Скидка до 20% на материалы</div>
+          <div class="bento-text">
+            Передаем вам наши оптовые дилерские скидки у поставщиков смесей, кабеля, плитки и сантехники с чеками от базы.
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTACTS FOOTER BLOCK -->
+      <div class="footer-card">
+        <div class="section-tag">КОНТАКТЫ ИНЖЕНЕРНОГО ОТДЕЛА</div>
+        <h3 style="font-size:20px; font-weight:900;" id="ui-footer-brand">СТРОЙМАСТЕР ПРО</h3>
+        <div class="contact-grid">
+          <div>
+            <strong>Адрес офиса</strong>
+            <span id="ui-address">г. Южно-Сахалинск, ул. Сахалинская, 48, оф. 204</span>
+          </div>
+          <div>
+            <strong>Телефон / WhatsApp прораба</strong>
+            <span id="ui-phone">+7 (914) 755-44-33</span>
+          </div>
+          <div>
+            <strong>Режим работы</strong>
+            <span>Ежедневно с 08:30 до 20:30 (выезд на замер без выходных)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FLOATING CUSTOMIZER BUTTON -->
+  <button type="button" class="demo-fab" onclick="openCfgModal()">⚙️ Подстроить под компанию</button>
+
+  <!-- COMPANY CUSTOMIZER MODAL -->
+  <div class="modal-backdrop" id="cfg-modal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <span>Подстройка под компанию</span>
+        <button type="button" class="modal-close" onclick="closeCfgModal()">✕</button>
+      </div>
+      <div class="field">
+        <label>Название строительной фирмы / бригады</label>
+        <input type="text" id="in-brand" value="СТРОЙМАСТЕР ПРО" />
+      </div>
+      <div class="field">
+        <label>Город</label>
+        <input type="text" id="in-city" value="ЮЖНО-САХАЛИНСК" />
+      </div>
+      <div class="field">
+        <label>Адрес офиса</label>
+        <input type="text" id="in-addr" value="г. Южно-Сахалинск, ул. Сахалинская, 48, оф. 204" />
+      </div>
+      <div class="field">
+        <label>Телефон (для WhatsApp)</label>
+        <input type="text" id="in-phone" value="+7 (914) 755-44-33" />
+      </div>
+      <button type="button" class="btn-primary" style="width:100%;" onclick="applyCfg()">Применить к сайту</button>
+    </div>
+  </div>
+
+  <!-- ENGINEER MEASUREMENT MODAL -->
+  <div class="modal-backdrop" id="measure-modal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <span>Вызов инженера на замер (0 ₽)</span>
+        <button type="button" class="modal-close" onclick="closeMeasureModal()">✕</button>
+      </div>
+      <div class="field">
+        <label>Ваше имя</label>
+        <input type="text" id="ms-name" placeholder="Дмитрий" />
+      </div>
+      <div class="field">
+        <label>Адрес объекта или ЖК</label>
+        <input type="text" id="ms-addr" placeholder="ЖК Авангард / ул. Ленина" />
+      </div>
+      <div class="field">
+        <label>Контактный телефон</label>
+        <input type="tel" id="ms-phone" placeholder="+7 (999) 000-00-00" />
+      </div>
+      <button type="button" class="btn-wa-full" onclick="submitMeasure()">Отправить заявку в WhatsApp</button>
+    </div>
+  </div>
+
+  <script>
+    let baseRatePerM2 = 14000;
+    let objTypeName = "Квартира / Новостройка";
+    let workMultiplier = 1.0;
+    let weeksFactor = 0.09;
+    let workTypeName = "Капитальный под ключ";
+    let currentArea = 65;
+    let companyPhoneRaw = "79147554433";
+
+    function pickObjType(btn) {
+      document.querySelectorAll("#obj-types .opt-card").forEach((c) => c.classList.remove("active"));
+      btn.classList.add("active");
+      baseRatePerM2 = parseFloat(btn.dataset.rate);
+      objTypeName = btn.dataset.name;
+      recalcEstimate();
+    }
+
+    function pickWorkType(btn) {
+      document.querySelectorAll("#work-types .opt-card").forEach((c) => c.classList.remove("active"));
+      btn.classList.add("active");
+      workMultiplier = parseFloat(btn.dataset.mult);
+      weeksFactor = parseFloat(btn.dataset.weeksFactor);
+      workTypeName = btn.dataset.name;
+      recalcEstimate();
+    }
+
+    function updateArea(val) {
+      currentArea = parseInt(val, 10);
+      document.getElementById("area-display").textContent = currentArea + " м²";
+      recalcEstimate();
+    }
+
+    function toggleExtra(el) {
+      el.classList.toggle("selected");
+      const box = el.querySelector(".chk-box");
+      if (el.classList.contains("selected")) {
+        box.innerHTML =
+          '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0B0F17" stroke-width="3.5"><polyline points="20 6 9 17 4 12"/></svg>';
+      } else {
+        box.innerHTML = "";
+      }
+      recalcEstimate();
+    }
+
+    function recalcEstimate() {
+      let baseTotal = baseRatePerM2 * workMultiplier * currentArea;
+
+      document.querySelectorAll("#extras-box .extra-item.selected").forEach((item) => {
+        const perM2 = parseFloat(item.dataset.perm2 || "0");
+        const flat = parseFloat(item.dataset.flat || "0");
+        baseTotal += perM2 * currentArea + flat;
+      });
+
+      const roundedTotal = Math.round(baseTotal / 5000) * 5000;
+      const estWeeks = Math.max(2, Math.round(currentArea * weeksFactor));
+
+      document.getElementById("sum-obj").textContent = objTypeName;
+      document.getElementById("sum-work").textContent = workTypeName;
+      document.getElementById("sum-area").textContent = currentArea + " м²";
+      document.getElementById("sum-price").textContent = roundedTotal.toLocaleString("ru-RU") + " ₽";
+      document.getElementById("sum-weeks").textContent = `~${estWeeks} нед.`;
+    }
+
+    function directWA() {
+      const brand = document.getElementById("in-brand").value.trim() || "СТРОЙМАСТЕР ПРО";
+      const msg = encodeURIComponent(
+        `Здравствуйте! Интересует расчет стоимости ремонта/строительства в компании ${brand}.`
+      );
+      window.open(`https://wa.me/${companyPhoneRaw}?text=${msg}`, "_blank");
+    }
+
+    function sendQuizToWA() {
+      const brand = document.getElementById("in-brand").value.trim() || "СТРОЙМАСТЕР ПРО";
+      const price = document.getElementById("sum-price").textContent;
+      const weeks = document.getElementById("sum-weeks").textContent;
+      const extras = Array.from(document.querySelectorAll("#extras-box .extra-item.selected"))
+        .map((e) => e.dataset.title)
+        .join(", ");
+
+      const msg = encodeURIComponent(
+        `Здравствуйте! Сделал расчет сметы на сайте ${brand}:\n` +
+          `• Объект: ${objTypeName}\n` +
+          `• Тип работ: ${workTypeName}\n` +
+          `• Площадь: ${currentArea} м²\n` +
+          `• Опции: ${extras || "Без доп. опций"}\n` +
+          `• Предварительная смета: ${price} (${weeks})\n` +
+          `Подскажите, когда свободен инженер на бесплатный замер?`
+      );
+      window.open(`https://wa.me/${companyPhoneRaw}?text=${msg}`, "_blank");
+    }
+
+    function openCfgModal() {
+      document.getElementById("cfg-modal").classList.add("open");
+    }
+
+    function closeCfgModal() {
+      document.getElementById("cfg-modal").classList.remove("open");
+    }
+
+    function openMeasureModal() {
+      document.getElementById("measure-modal").classList.add("open");
+    }
+
+    function closeMeasureModal() {
+      document.getElementById("measure-modal").classList.remove("open");
+    }
+
+    function applyCfg() {
+      const brand = document.getElementById("in-brand").value.trim() || "СТРОЙМАСТЕР ПРО";
+      const city = document.getElementById("in-city").value.trim() || "ЮЖНО-САХАЛИНСК";
+      const addr = document.getElementById("in-addr").value.trim();
+      const phone = document.getElementById("in-phone").value.trim();
+
+      document.getElementById("ui-logo").textContent = brand.charAt(0).toUpperCase();
+      document.getElementById("ui-brand").textContent = brand.toUpperCase();
+      document.getElementById("ui-footer-brand").textContent = brand.toUpperCase();
+      document.getElementById("ui-city").textContent = `${city.toUpperCase()} · ПОД КЛЮЧ`;
+      document.getElementById("ui-address").textContent = addr;
+      document.getElementById("ui-phone").textContent = phone;
+      document.title = `${brand.toUpperCase()} // Ремонт и строительство под ключ`;
+
+      const digits = phone.replace(/\D/g, "");
+      if (digits.length >= 10) {
+        companyPhoneRaw = digits.startsWith("8") ? "7" + digits.slice(1) : digits;
+      }
+      closeCfgModal();
+    }
+
+    function submitMeasure() {
+      const name = document.getElementById("ms-name").value.trim() || "Клиент";
+      const addr = document.getElementById("ms-addr").value.trim() || "Не указан";
+      const phone = document.getElementById("ms-phone").value.trim() || "Не указан";
+      const price = document.getElementById("sum-price").textContent;
+
+      const msg = encodeURIComponent(
+        `Заявка на бесплатный замер:\n` +
+          `• Имя: ${name}\n` +
+          `• Адрес объекта: ${addr}\n` +
+          `• Телефон: ${phone}\n` +
+          `• Расчет на сайте: ${objTypeName}, ${currentArea} м² (${price})`
+      );
+      window.open(`https://wa.me/${companyPhoneRaw}?text=${msg}`, "_blank");
+      closeMeasureModal();
+    }
+
+    recalcEstimate();
+  </script>
+</body>
+</html>
